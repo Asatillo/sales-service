@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Nova Sales API
 
 ## Requirements
@@ -45,3 +46,7 @@ For the further usiage of the container, use:
 ```bash
 docker-compose up
 ```
+=======
+# SalesAPI
+Sales API for the project Nova
+>>>>>>> 8fb40913d1ca79176b7c6aa155385ed8ad1127cf
