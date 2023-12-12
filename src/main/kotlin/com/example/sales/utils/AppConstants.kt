@@ -8,6 +8,7 @@ class AppConstants {
         const val DEFAULT_SORT_BY = "id"
         const val PROMOTIONS_TYPES = "^(Percentage|Fixed)$"
         const val DEVICE_TYPES = "^(MOBILE|ROUTER)$"
+        const val DECISION_TYPES = "^(ACCEPTED|REJECTED|PENDING)$"
         const val COMMUNICATION_TYPES = "^(SMS|EMAIL|CALL|IN-PERSON)$"
     }
 }
