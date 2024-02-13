@@ -6,6 +6,6 @@ import org.springframework.web.bind.annotation.ResponseStatus
 
 @ResponseStatus(HttpStatus.CONFLICT)
 class ExistingResourceException(
-    private val apiResponse: ApiResponse,
-    private val status: HttpStatus = HttpStatus.CONFLICT) : RuntimeException() {
+    val apiResponse: ApiResponse,
+    val status: HttpStatus = HttpStatus.CONFLICT) : RuntimeException() {
 }

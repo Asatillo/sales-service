@@ -15,30 +15,26 @@ import jakarta.validation.constraints.Size
 data class Promotion(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private var id: Long,
+    var id: Long,
 
     @NotBlank(message = "Name cannot be blank")
     @Size(max = 50, message = "Name must be less than 50 characters")
-    private var name: String,
+    var name: String,
 
     @NotBlank(message = "Description cannot be blank")
     @Size(max = 200, message = "Description must be less than 200 characters")
-    private var description: String,
-
-    @NotBlank(message = "Device cannot be blank")
-    @Pattern(regexp = DEVICE_TYPES, message = "Device must be ")
-    private var device: String,
+    var description: String,
 
     @NotNull(message = "Capital indicator cannot be blank")
-    private var isForCapitalOnly: Boolean = true,
+    var isForCapitalOnly: Boolean = true,
 
     @NotBlank(message = "Type cannot be blank")
     @Pattern(regexp = PROMOTIONS_TYPES, message = "Type must be either Percentage or Fixed")
-    private var type: String,
+    var type: String,
 
     @NotBlank(message = "Amount cannot be blank")
-    private var amount: Double,
+    var amount: Double,
 
     @NotNull(message = "Active indicator cannot be blank")
-    private var active: Boolean = true
+    var active: Boolean = true
 )

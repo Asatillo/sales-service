@@ -10,13 +10,13 @@ import org.springframework.http.HttpStatus
 )
 class ApiResponse {
     @JsonPropertyOrder("success")
-    private var success: Boolean
+    var success: Boolean
 
     @JsonPropertyOrder("message")
-    private var message: String
+    var message: String
 
     @JsonIgnore
-    private lateinit var status: HttpStatus
+    lateinit var status: HttpStatus
 
     constructor(success: Boolean, message: String){
         this.success = success

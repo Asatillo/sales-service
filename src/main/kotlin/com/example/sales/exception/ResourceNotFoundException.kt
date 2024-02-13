@@ -6,10 +6,12 @@ import org.springframework.web.bind.annotation.ResponseStatus
 
 @ResponseStatus(HttpStatus.NOT_FOUND)
 class ResourceNotFoundException(
-    private val apiResponse: ApiResponse,
-    private val status: HttpStatus = HttpStatus.NOT_FOUND): RuntimeException() {
+    var apiResponse: ApiResponse,
+    var status: HttpStatus): RuntimeException() {
 
-    constructor(resourceName: String, fieldName: String, fieldValue: Any) : this(ApiResponse(false, String.format("%s with %s '%s' not found", resourceName, fieldName, fieldValue)))
+        init {
+            status = HttpStatus.NOT_FOUND
+        }
 
 
 }
