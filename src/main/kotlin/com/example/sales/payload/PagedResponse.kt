@@ -10,11 +10,6 @@ class PagedResponse<Any>(
     private var totalPages: Int
 ) {
 
-    fun returnPagedResponse(resource: Page<Any> ): PagedResponse<Any> {
-        if(resource.numberOfElements == 0 ) {
-            return PagedResponse<Any>(emptyList(), resource.pageable.pageNumber, resource.pageable.pageSize, resource.totalElements, resource.totalPages)
-        }
-
         val list: List<Any>  = resource.content
 
         return PagedResponse<Any>(list, resource.pageable.pageNumber, resource.pageable.pageSize, resource.totalElements, resource.totalPages)

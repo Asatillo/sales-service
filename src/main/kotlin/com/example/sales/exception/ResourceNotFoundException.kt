@@ -11,11 +11,5 @@ class ResourceNotFoundException(
 
     constructor(resourceName: String, fieldName: String, fieldValue: Any) : this(ApiResponse(false, String.format("%s with %s '%s' not found", resourceName, fieldName, fieldValue)))
 
-    fun getApiResponse(): ApiResponse {
-        return apiResponse
-    }
 
-    fun getStatus(): HttpStatus {
-        return status
-    }
 }

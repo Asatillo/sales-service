@@ -8,12 +8,4 @@ import org.springframework.web.bind.annotation.ResponseStatus
 class BadRequestException(
     private val apiResponse: ApiResponse,
     private val status: HttpStatus = HttpStatus.BAD_REQUEST) : RuntimeException() {
-
-    fun getApiResponse(): ApiResponse {
-        return apiResponse
-    }
-
-    fun getStatus(): HttpStatus {
-        return status
-    }
 }

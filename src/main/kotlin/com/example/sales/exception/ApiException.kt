@@ -8,12 +8,4 @@ class ApiException(
     private var status: HttpStatus = HttpStatus.BAD_REQUEST): RuntimeException() {
 
     constructor(message: String) : this(ApiResponse(false, message))
-
-    fun getApiResponse(): ApiResponse {
-        return apiResponse
-    }
-
-    fun getStatus(): HttpStatus {
-        return status
-    }
 }
