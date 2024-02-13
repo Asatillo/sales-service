@@ -9,9 +9,14 @@ class PagedResponse<Any>(
     var totalElements: Long,
     var totalPages: Int
 ) {
-
-        val list: List<Any>  = resource.content
-
-        return PagedResponse<Any>(list, resource.pageable.pageNumber, resource.pageable.pageSize, resource.totalElements, resource.totalPages)
+    init {
+        this.page += 1
     }
+
+    constructor(resource: Page<Any> ): this(
+        content = resource.content,
+        page = resource.pageable.pageNumber,
+        size = resource.pageable.pageSize,
+        totalElements = resource.totalElements,
+        totalPages = resource.totalPages)
 }
