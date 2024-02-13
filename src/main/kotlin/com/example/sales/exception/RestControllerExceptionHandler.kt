@@ -23,22 +23,22 @@ class RestControllerExceptionHandler {
     @ResponseBody
     fun resolveException(exception: RuntimeException): ResponseEntity<ApiResponse> {
         val apiResponse = when (exception) {
-            is ApiException -> exception.getApiResponse()
-            is BadRequestException -> exception.getApiResponse()
-            is ExistingResourceException -> exception.getApiResponse()
-            is InvalidInputException -> exception.getApiResponse()
-            is ReferencedRecordException -> exception.getApiResponse()
-            is ResourceNotFoundException -> exception.getApiResponse()
+            is ApiException -> exception.apiResponse
+            is BadRequestException -> exception.apiResponse
+            is ExistingResourceException -> exception.apiResponse
+            is InvalidInputException -> exception.apiResponse
+            is ReferencedRecordException -> exception.apiResponse
+            is ResourceNotFoundException -> exception.apiResponse
             else -> throw IllegalStateException("Unexpected exception type: ${exception.javaClass}")
         }
 
         val status = when(exception) {
-            is ApiException -> exception.getStatus()
-            is BadRequestException -> exception.getStatus()
-            is ExistingResourceException -> exception.getStatus()
-            is InvalidInputException -> exception.getStatus()
-            is ReferencedRecordException -> exception.getStatus()
-            is ResourceNotFoundException -> exception.getStatus()
+            is ApiException -> exception.status
+            is BadRequestException -> exception.status
+            is ExistingResourceException -> exception.status
+            is InvalidInputException -> exception.status
+            is ReferencedRecordException -> exception.status
+            is ResourceNotFoundException -> exception.status
             else -> throw IllegalStateException("Unexpected exception type: ${exception.javaClass}")
         }
 
