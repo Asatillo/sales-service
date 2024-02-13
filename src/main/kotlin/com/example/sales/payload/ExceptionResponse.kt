@@ -1,6 +1,5 @@
 package com.example.sales.payload
 
-import lombok.Getter
 import java.time.Instant
 
 @Getter
