@@ -2,6 +2,7 @@ package com.example.sales.exception
 
 import com.example.sales.payload.ApiResponse
 import com.example.sales.payload.ExceptionResponse
+import com.example.sales.payload.ValidationErrorResponse
 import org.springframework.dao.DataIntegrityViolationException
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
@@ -57,14 +58,14 @@ class RestControllerExceptionHandler {
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(value = [MethodArgumentNotValidException::class])
     @ResponseBody
-    fun resolveException(exception: MethodArgumentNotValidException): ResponseEntity<ExceptionResponse> {
+    fun resolveException(exception: MethodArgumentNotValidException): ResponseEntity<ValidationErrorResponse> {
         val validationErrors:HashMap<String, String> = HashMap()
         exception.bindingResult.fieldErrors.forEach { fieldError ->
             validationErrors[fieldError.field] = fieldError.defaultMessage!!
         }
 
         val message = if(validationErrors.size == 1)  "Validation error" else "Validation errors"
-        return ResponseEntity(ExceptionResponse(message, HttpStatus.BAD_REQUEST.reasonPhrase,
+        return ResponseEntity(ValidationErrorResponse(message, HttpStatus.BAD_REQUEST.reasonPhrase,
             HttpStatus.BAD_REQUEST.value(), validationErrors), HttpStatus.BAD_REQUEST)
     }
 
