@@ -13,5 +13,6 @@ class ResourceNotFoundException(
             status = HttpStatus.NOT_FOUND
         }
 
-
+    constructor(resourceName: String, fieldName: String, fieldValue: Any) : this(ApiResponse(false,
+        String.format("%s with %s '%s' not found", resourceName, fieldName, fieldValue)), HttpStatus.NOT_FOUND)
 }
