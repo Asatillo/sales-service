@@ -7,35 +7,35 @@ import jakarta.validation.constraints.*
 
 @Entity
 data class Discount(
-    @NotBlank(message = "Name cannot be blank")
-    @Size(max = 50, message = "Name must be less than 50 characters")
+    @field:NotBlank(message = "Name cannot be blank")
+    @field:Size(max = 50, message = "Name must be less than 50 characters")
     var name: String,
 
-    @NotBlank(message = "Description cannot be blank")
-    @Size(max = 200, message = "Description must be less than 200 characters")
+    @field:NotBlank(message = "Description cannot be blank")
+    @field:Size(max = 200, message = "Description must be less than 200 characters")
     var description: String,
 
-    @NotNull(message = "Service types cannot be blank")
+    @field:NotNull(message = "Service types cannot be blank")
     @Enumerated(EnumType.STRING)
     var productTypes: ProductType,
 
     // percentage, fixed
-    @NotNull(message = "Type cannot be blank")
+    @field:NotNull(message = "Type cannot be blank")
     @Enumerated(EnumType.STRING)
     var type: DiscountAmountType,
 
-    @NotNull(message = "Amount cannot be null")
+    @field:NotNull(message = "Amount cannot be null")
+    @field:Positive(message = "Amount must be greater than zero")
     var amount: Double,
 
     // if percentage, what is the max amount of the discount that can be applied
     // if zero, then no max amount
-    @NotNull(message = "Max amount cannot be null")
-    @PositiveOrZero(message = "Max amount must be greater than or equal to zero")
+    @field:NotNull(message = "Max amount cannot be null")
+    @field:PositiveOrZero(message = "Max amount must be greater than or equal to zero")
     var maxAmount: Double,
 
     // if service type is plan or service, then what type of device is it for
 
-    @NotBlank(message = "Type cannot be blank")
     var active: Boolean = true,
 
     @Id
