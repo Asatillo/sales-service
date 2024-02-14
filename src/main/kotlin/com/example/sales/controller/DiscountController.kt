@@ -4,6 +4,7 @@ import com.example.sales.model.Discount
 import com.example.sales.payload.PagedResponse
 import com.example.sales.payload.requests.DiscountRequest
 import com.example.sales.service.DiscountService
+import jakarta.validation.Valid
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 
@@ -27,7 +28,7 @@ class DiscountController(val discountService: DiscountService) {
     }
 
     @PostMapping
-    fun addDiscount(discount: DiscountRequest): ResponseEntity<Discount> {
+    fun addDiscount(@Valid @RequestBody discount: DiscountRequest): ResponseEntity<Discount> {
         return discountService.addDiscount(discount)
     }
 
