@@ -49,10 +49,15 @@ class RestControllerExceptionHandler {
     @ResponseStatus(HttpStatus.METHOD_NOT_ALLOWED)
     @ResponseBody
     fun resolveException(exception: HttpRequestMethodNotSupportedException): ResponseEntity<ExceptionResponse> {
-        val message = String.format("Requested method %s is not supported for this endpoint. Allowed methods: %s",
-            exception.method, exception.supportedMethods.toString())
-        return ResponseEntity(ExceptionResponse(message, HttpStatus.METHOD_NOT_ALLOWED.reasonPhrase,
-            HttpStatus.METHOD_NOT_ALLOWED.value()), HttpStatus.METHOD_NOT_ALLOWED)
+        val message = exception.supportedMethods?.let {
+            String.format("Requested method %s is not supported for this endpoint. Allowed methods: %s",
+                exception.method, it.joinToString(", "))
+        }
+        return ResponseEntity(message?.let {
+            ExceptionResponse(
+                it, HttpStatus.METHOD_NOT_ALLOWED.reasonPhrase,
+                HttpStatus.METHOD_NOT_ALLOWED.value())
+        }, HttpStatus.METHOD_NOT_ALLOWED)
     }
 
     @ResponseStatus(HttpStatus.BAD_REQUEST)
