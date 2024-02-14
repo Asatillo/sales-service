@@ -15,8 +15,8 @@ import org.springframework.http.ResponseEntity
 @Service
 class DiscountService(val discountRepository: DiscountRepository) {
     fun getDiscounts(page: Int, size: Int, sort: String, search: String): PagedResponse<Discount> {
-        var pageable : Pageable = PageRequest.of(page, size, Sort.Direction.ASC, sort)
-        var customers = discountRepository.findAll(pageable)
+        val pageable : Pageable = PageRequest.of(page, size, Sort.Direction.ASC, sort)
+        val customers = discountRepository.findAll(pageable)
         return PagedResponse(customers)
     }
 
