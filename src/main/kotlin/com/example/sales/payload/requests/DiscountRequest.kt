@@ -1,5 +1,6 @@
 package com.example.sales.payload.requests
 
+import com.example.sales.model.Discount
 import com.example.sales.model.enums.DiscountAmountType
 import com.example.sales.model.enums.ProductType
 import jakarta.persistence.EnumType
@@ -36,4 +37,7 @@ data class DiscountRequest (
     var maxAmount: Double
 
 ){
+    fun getDiscount(): Discount {
+        return Discount(name, description, productTypes, type, amount, maxAmount)
+    }
 }

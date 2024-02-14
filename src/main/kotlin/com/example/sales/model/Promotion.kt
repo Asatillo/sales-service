@@ -1,11 +1,6 @@
 package com.example.sales.model
 
-import com.example.sales.utils.AppConstants.Companion.DEVICE_TYPES
-import com.example.sales.utils.AppConstants.Companion.PROMOTIONS_TYPES
-import jakarta.persistence.Entity
-import jakarta.persistence.GeneratedValue
-import jakarta.persistence.GenerationType
-import jakarta.persistence.Id
+import com.example.sales.model.enums.DiscountAmountType
 import jakarta.persistence.*
 import jakarta.validation.constraints.NotBlank
 import jakarta.validation.constraints.NotNull

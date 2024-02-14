@@ -21,16 +21,8 @@ class DiscountService(val discountRepository: DiscountRepository) {
     }
 
     fun addDiscount(discount: DiscountRequest): ResponseEntity<Discount> {
-        return ResponseEntity(discountRepository.save(
-            Discount(
-                name = discount.name,
-                description = discount.description,
-                productTypes = discount.productTypes,
-                type = discount.type,
-                amount = discount.amount,
-                maxAmount = discount.maxAmount,
-            )
-        ), HttpStatus.CREATED)
+        println(discount.getDiscount())
+        return ResponseEntity(discountRepository.save(discount.getDiscount()), HttpStatus.CREATED)
     }
 
     fun getDiscount(id: Long): ResponseEntity<Discount> {
