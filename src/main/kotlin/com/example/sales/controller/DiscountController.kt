@@ -1,6 +1,8 @@
 package com.example.sales.controller
 
+import com.example.sales.exception.BadRequestException
 import com.example.sales.model.Discount
+import com.example.sales.payload.ApiResponse
 import com.example.sales.payload.PagedResponse
 import com.example.sales.payload.requests.DiscountRequest
 import com.example.sales.service.DiscountService
@@ -30,6 +32,19 @@ class DiscountController(val discountService: DiscountService) {
     @PostMapping
     fun addDiscount(@Valid @RequestBody discount: DiscountRequest): ResponseEntity<Discount> {
         return discountService.addDiscount(discount)
+    }
+
+    @PutMapping("/{id}")
+    fun updateDiscount(@PathVariable id: Long, @Valid @RequestBody discount: DiscountRequest): ResponseEntity<Discount> {
+        return discountService.updateDiscount(id, discount)
+    }
+
+    @PatchMapping("/{id}/{status}")
+    fun updateDiscountStatus(@PathVariable id: Long, @PathVariable status: String): ResponseEntity<Discount> {
+        val booleanStatus = if(status == "activate") true else if(status == "deactivate") false else throw BadRequestException(
+            ApiResponse(false, "Invalid status")
+        )
+        return discountService.updateDiscountStatus(id, booleanStatus)
     }
 
 }
