@@ -97,7 +97,7 @@ class RestControllerExceptionHandler {
     @ExceptionHandler(value = [HttpMessageNotReadableException::class])
     @ResponseBody
     fun resolveException(exception: HttpMessageNotReadableException): ResponseEntity<ExceptionResponse> {
-        return ResponseEntity(ExceptionResponse("Malformed JSON request", HttpStatus.BAD_REQUEST.reasonPhrase,
+        return ResponseEntity(ExceptionResponse(exception.message!!, HttpStatus.BAD_REQUEST.reasonPhrase,
             HttpStatus.BAD_REQUEST.value()), HttpStatus.BAD_REQUEST)
     }
 }
