@@ -1,10 +1,10 @@
-package com.example.sales.controller;
+package com.example.sales.controller
 
 import com.example.sales.model.OfferedPromotion
 import com.example.sales.payload.ApiResponse
 import com.example.sales.payload.PagedResponse
 import com.example.sales.payload.requests.OfferedPromotionRequest
-import com.example.sales.service.OfferedPromotionsService;
+import com.example.sales.service.OfferedPromotionsService
 import jakarta.validation.Valid
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*

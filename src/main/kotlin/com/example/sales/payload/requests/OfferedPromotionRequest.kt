@@ -4,8 +4,6 @@ import com.example.sales.model.enums.CommunicationType
 import com.example.sales.model.enums.DecisionType
 import jakarta.persistence.*
 import jakarta.validation.constraints.NotNull
-import java.time.LocalDate
-
 
 data class OfferedPromotionRequest(
     @field:NotNull(message = "Customer id cannot be blank")

@@ -23,7 +23,6 @@ class PromotionService(val promotionRepository: PromotionRepository) {
     }
 
     fun addPromotion(promotion: PromotionRequest): ResponseEntity<Promotion> {
-        println(promotion.getPromotion())
         return ResponseEntity(promotionRepository.save(promotion.getPromotion()), HttpStatus.CREATED)
     }
 

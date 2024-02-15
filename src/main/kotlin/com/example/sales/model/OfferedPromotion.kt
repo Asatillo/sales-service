@@ -3,10 +3,7 @@ package com.example.sales.model
 import com.example.sales.model.enums.CommunicationType
 import com.example.sales.model.enums.DecisionType
 import jakarta.persistence.*
-import jakarta.validation.constraints.NotBlank
 import jakarta.validation.constraints.NotNull
-import org.hibernate.annotations.CreationTimestamp
-import org.springframework.data.annotation.CreatedBy
 import java.time.LocalDate
 
 @Entity
