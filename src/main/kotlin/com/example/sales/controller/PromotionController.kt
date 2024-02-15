@@ -41,9 +41,13 @@ class PromotionController(val promotionService: PromotionService) {
 
     @PatchMapping("/{id}/{status}")
     fun updatePromotionStatus(@PathVariable id: Long, @PathVariable status: String): ResponseEntity<Promotion> {
-        val booleanStatus = if(status == "activate") true else if(status == "deactivate") false else throw BadRequestException(
-            ApiResponse(false, "Invalid status")
-        )
+        val booleanStatus = when (status) {
+            "activate" -> true
+            "deactivate" -> false
+            else -> throw BadRequestException(
+                ApiResponse(false, "Invalid status")
+            )
+        }
         return promotionService.updatePromotionStatus(id, booleanStatus)
     }
 
