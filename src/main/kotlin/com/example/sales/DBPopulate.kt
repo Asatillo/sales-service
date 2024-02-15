@@ -1,14 +1,19 @@
 package com.example.sales
 
+import com.example.sales.model.OfferedPromotion
 import com.example.sales.model.Promotion
+import com.example.sales.model.enums.CommunicationType
 import com.example.sales.model.enums.DiscountAmountType
 import com.example.sales.model.enums.ProductType
+import com.example.sales.repository.OfferedPromotionsRepository
 import com.example.sales.repository.PromotionRepository
 import org.springframework.boot.CommandLineRunner
 import org.springframework.stereotype.Component
+import java.time.LocalDate
 
 @Component
-class DBPopulate(val promotionRepository: PromotionRepository) : CommandLineRunner {
+class DBPopulate(val promotionRepository: PromotionRepository,
+    val offeredPromotionsRepository: OfferedPromotionsRepository) : CommandLineRunner {
     override fun run(vararg args: String?) {
 
         val promotion1 = Promotion(
@@ -52,6 +57,43 @@ class DBPopulate(val promotionRepository: PromotionRepository) : CommandLineRunn
             maxAmount = 10000.0,
         )
         promotionRepository.saveAll(listOf(promotion1, promotion2, promotion3, promotion4, promotion5))
+
+        val offeredPromotion1 = OfferedPromotion(
+            customerId = 1,
+            promotion = promotion1,
+            offerDate = LocalDate.now(),
+            communicationType = CommunicationType.EMAIL
+        )
+
+        val offeredPromotion2 = OfferedPromotion(
+            customerId = 2,
+            promotion = promotion2,
+            offerDate = LocalDate.now(),
+            communicationType = CommunicationType.SMS
+        )
+
+        val offeredPromotion3 = OfferedPromotion(
+            customerId = 3,
+            promotion = promotion3,
+            offerDate = LocalDate.now(),
+            communicationType = CommunicationType.EMAIL
+        )
+
+        val offeredPromotion4 = OfferedPromotion(
+            customerId = 4,
+            promotion = promotion4,
+            offerDate = LocalDate.now(),
+            communicationType = CommunicationType.SMS
+        )
+
+        val offeredPromotion5 = OfferedPromotion(
+            customerId = 5,
+            promotion = promotion5,
+            offerDate = LocalDate.now(),
+            communicationType = CommunicationType.EMAIL
+        )
+
+        offeredPromotionsRepository.saveAll(listOf(offeredPromotion1, offeredPromotion2, offeredPromotion3, offeredPromotion4, offeredPromotion5))
     }
 
 }
