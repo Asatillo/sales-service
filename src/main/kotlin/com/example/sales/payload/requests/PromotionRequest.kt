@@ -1,6 +1,6 @@
 package com.example.sales.payload.requests
 
-import com.example.sales.model.Discount
+import com.example.sales.model.Promotion
 import com.example.sales.model.enums.DiscountAmountType
 import com.example.sales.model.enums.ProductType
 import jakarta.persistence.EnumType
@@ -11,7 +11,7 @@ import jakarta.validation.constraints.Positive
 import jakarta.validation.constraints.PositiveOrZero
 import jakarta.validation.constraints.Size
 
-data class DiscountRequest (
+data class PromotionRequest (
     @field:NotBlank(message = "Name cannot be blank")
     @field:Size(max = 50, message = "Name must be less than 50 characters")
     var name: String,
@@ -37,7 +37,7 @@ data class DiscountRequest (
     var maxAmount: Double
 
 ){
-    fun getDiscount(): Discount {
-        return Discount(name, description, productTypes, type, amount, maxAmount)
+    fun getPromotion(): Promotion {
+        return Promotion(name, description, productTypes, type, amount, maxAmount)
     }
 }
