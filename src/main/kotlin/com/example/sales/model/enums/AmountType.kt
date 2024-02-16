@@ -1,6 +1,6 @@
 package com.example.sales.model.enums
 
-enum class DiscountAmountType {
+enum class AmountType {
     PERCENTAGE,
     FIXED
 }

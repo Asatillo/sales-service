@@ -1,9 +1,12 @@
 package com.example.sales.model
 
-import com.example.sales.model.enums.DiscountAmountType
+import com.example.sales.model.enums.AmountType
 import com.example.sales.model.enums.ProductType
+import com.example.sales.model.enums.PromotionType
 import jakarta.persistence.*
 import jakarta.validation.constraints.*
+import java.time.LocalDate
+import java.util.Date
 
 @Entity
 data class Promotion(
@@ -23,22 +26,23 @@ data class Promotion(
     @Enumerated(EnumType.STRING)
     var productTypes: ProductType,
 
-    // percentage, fixed
     @field:NotNull(message = "Type cannot be blank")
     @Enumerated(EnumType.STRING)
-    var type: DiscountAmountType,
+    var amountType: AmountType,
+
+    var startDate: LocalDate? = LocalDate.now(),
+
+    var endDate: LocalDate? = null,
+
+    var targetCustomerSegment: String? = null,
 
     @field:NotNull(message = "Amount cannot be null")
     @field:Positive(message = "Amount must be greater than zero")
     var amount: Double,
 
-    // if percentage, what is the max amount of the discount that can be applied
-    // if zero, then no max amount
     @field:NotNull(message = "Max amount cannot be null")
     @field:PositiveOrZero(message = "Max amount must be greater than or equal to zero")
     var maxAmount: Double,
-
-    // if service type is plan or service, then what type of device is it for
 
     var active: Boolean = true,
 
@@ -46,3 +50,5 @@ data class Promotion(
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     var id: Long? = null,
 )
+
+//targetAudience: Customer segments eligible for the offer/promotion (e.g., new customers, specific plans)

@@ -1,8 +1,9 @@
 package com.example.sales.payload.requests
 
 import com.example.sales.model.Promotion
-import com.example.sales.model.enums.DiscountAmountType
+import com.example.sales.model.enums.AmountType
 import com.example.sales.model.enums.ProductType
+import com.example.sales.model.enums.PromotionType
 import jakarta.persistence.EnumType
 import jakarta.persistence.Enumerated
 import jakarta.validation.constraints.NotBlank
@@ -10,6 +11,7 @@ import jakarta.validation.constraints.NotNull
 import jakarta.validation.constraints.Positive
 import jakarta.validation.constraints.PositiveOrZero
 import jakarta.validation.constraints.Size
+import java.time.LocalDate
 
 data class PromotionRequest (
     @field:NotBlank(message = "Name cannot be blank")
@@ -26,8 +28,17 @@ data class PromotionRequest (
 
     @field:NotNull(message = "Type cannot be blank")
     @field:Enumerated(EnumType.STRING)
-    var type: DiscountAmountType,
     var type: PromotionType,
+
+    @field:NotNull(message = "Amount type cannot be blank")
+    @field:Enumerated(EnumType.STRING)
+    var amountType: AmountType,
+
+    var startDate: LocalDate? = LocalDate.now(),
+
+    var endDate: LocalDate? = null,
+
+    var targetCustomerSegment: String? = null,
 
     @field:NotNull(message = "Amount cannot be null")
     @field:Positive
@@ -39,6 +50,6 @@ data class PromotionRequest (
 
 ){
     fun getPromotion(): Promotion {
-        return Promotion(name, description, productTypes, type, amount, maxAmount)
+        return Promotion(name, description, type, productTypes, amountType, startDate, endDate, targetCustomerSegment, amount, maxAmount)
     }
 }
