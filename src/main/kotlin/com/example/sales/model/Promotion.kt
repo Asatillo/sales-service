@@ -15,6 +15,10 @@ data class Promotion(
     @field:Size(max = 200, message = "Description must be less than 200 characters")
     var description: String,
 
+    @field:NotNull(message = "Type cannot be blank")
+    @Enumerated(EnumType.STRING)
+    var type: PromotionType,
+
     @field:NotNull(message = "Service types cannot be blank")
     @Enumerated(EnumType.STRING)
     var productTypes: ProductType,
