@@ -3,8 +3,9 @@ package com.example.sales
 import com.example.sales.model.OfferedPromotion
 import com.example.sales.model.Promotion
 import com.example.sales.model.enums.CommunicationType
-import com.example.sales.model.enums.DiscountAmountType
+import com.example.sales.model.enums.AmountType
 import com.example.sales.model.enums.ProductType
+import com.example.sales.model.enums.PromotionType
 import com.example.sales.repository.OfferedPromotionsRepository
 import com.example.sales.repository.PromotionRepository
 import org.springframework.boot.CommandLineRunner
@@ -20,7 +21,8 @@ class DBPopulate(val promotionRepository: PromotionRepository,
             name = "5% off",
             description = "5% off all services",
             productTypes = ProductType.PLAN,
-            type = DiscountAmountType.PERCENTAGE,
+            type = PromotionType.DISCOUNT,
+            amountType = AmountType.PERCENTAGE,
             amount = 5.0,
             maxAmount = 10000.0,
         )
@@ -28,7 +30,8 @@ class DBPopulate(val promotionRepository: PromotionRepository,
             name = "10% off",
             description = "10% off all devices",
             productTypes = ProductType.DEVICE,
-            type = DiscountAmountType.PERCENTAGE,
+            type = PromotionType.DISCOUNT,
+            amountType = AmountType.PERCENTAGE,
             amount = 10.0,
             maxAmount = 10000.0,
         )
@@ -36,15 +39,17 @@ class DBPopulate(val promotionRepository: PromotionRepository,
             name = "30% off",
             description = "10% off all plans",
             productTypes = ProductType.PLAN,
-            type = DiscountAmountType.PERCENTAGE,
+            type = PromotionType.DISCOUNT,
             amount = 30.0,
+            amountType = AmountType.PERCENTAGE,
             maxAmount = 10000.0,
         )
         val promotion4 = Promotion(
             name = "10000 HUF",
             description = "10000 off all devices",
             productTypes = ProductType.DEVICE,
-            type = DiscountAmountType.FIXED,
+            type = PromotionType.DISCOUNT,
+            amountType = AmountType.FIXED,
             amount = 10000.0,
             maxAmount = 10000.0,
         )
@@ -52,7 +57,8 @@ class DBPopulate(val promotionRepository: PromotionRepository,
             name = "10000 HUF",
             description = "10000 off all plans",
             productTypes = ProductType.PLAN,
-            type = DiscountAmountType.FIXED,
+            type = PromotionType.DISCOUNT,
+            amountType = AmountType.FIXED,
             amount = 10000.0,
             maxAmount = 10000.0,
         )
