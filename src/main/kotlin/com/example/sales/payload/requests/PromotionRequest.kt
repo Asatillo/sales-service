@@ -27,6 +27,7 @@ data class PromotionRequest (
     @field:NotNull(message = "Type cannot be blank")
     @field:Enumerated(EnumType.STRING)
     var type: DiscountAmountType,
+    var type: PromotionType,
 
     @field:NotNull(message = "Amount cannot be null")
     @field:Positive
