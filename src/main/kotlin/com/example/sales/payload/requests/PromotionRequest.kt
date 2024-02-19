@@ -36,7 +36,8 @@ data class PromotionRequest (
 
     var startDate: LocalDate? = LocalDate.now(),
 
-    var endDate: LocalDate? = null,
+    @field:NotNull(message = "End date cannot be null")
+    var endDate: LocalDate,
 
     var targetCustomerSegment: String? = null,
 
@@ -46,10 +47,14 @@ data class PromotionRequest (
 
     @field:NotNull(message = "Max amount cannot be null")
     @field:PositiveOrZero
-    var maxAmount: Double
+    var maxAmount: Double,
+
+    @field:NotNull(message = "Renewable cannot be null")
+    var renewable: Boolean
 
 ){
     fun getPromotion(): Promotion {
-        return Promotion(name, description, type, productTypes, amountType, startDate, endDate, targetCustomerSegment, amount, maxAmount)
+        return Promotion(name, description, type, productTypes, amountType, startDate, endDate, targetCustomerSegment,
+            amount, maxAmount, renewable)
     }
 }

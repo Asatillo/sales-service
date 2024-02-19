@@ -6,7 +6,6 @@ import com.example.sales.model.enums.PromotionType
 import jakarta.persistence.*
 import jakarta.validation.constraints.*
 import java.time.LocalDate
-import java.util.Date
 
 @Entity
 data class Promotion(
@@ -30,9 +29,11 @@ data class Promotion(
     @Enumerated(EnumType.STRING)
     var amountType: AmountType,
 
+
     var startDate: LocalDate? = LocalDate.now(),
 
-    var endDate: LocalDate? = null,
+    @field:NotNull(message = "End date cannot be null")
+    var endDate: LocalDate,
 
     var targetCustomerSegment: String? = null,
 
@@ -44,11 +45,18 @@ data class Promotion(
     @field:PositiveOrZero(message = "Max amount must be greater than or equal to zero")
     var maxAmount: Double,
 
+    @field:NotNull(message = "Renewable cannot be null")
+    var renewable: Boolean,
+
     var active: Boolean = true,
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     var id: Long? = null,
-)
+) {
+    fun isExpired(): Boolean {
+        return endDate != null && endDate!!.isBefore(LocalDate.now())
+    }
+}
 
 //targetAudience: Customer segments eligible for the offer/promotion (e.g., new customers, specific plans)
