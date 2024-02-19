@@ -1,4 +1,4 @@
-package com.example.sales.model
+package com.example.sales.payload.requests
 
 import com.example.sales.model.enums.PaymentMethod
 import com.example.sales.model.enums.PaymentProgress
@@ -8,18 +8,15 @@ import jakarta.validation.constraints.Min
 import jakarta.validation.constraints.NotNull
 import java.time.LocalDate
 
-@Entity
-class Sale(
-    @ManyToOne
-    @JoinColumn(name = "promotion_id")
-    var promotion: Promotion,
+class SaleRequest(
+    var promotionId: Long? = null,
 
     @field:NotNull(message = "Product ID is required")
     var productId: Long? = null,
 
     @field:NotNull(message = "Product type is required")
     @Enumerated(EnumType.STRING)
-    var productType: ProductType? = null,
+    var productType: ProductType,
 
     @field:NotNull(message = "Customer ID is required")
     var customerId: Long,
@@ -35,16 +32,11 @@ class Sale(
     @field:NotNull(message = "Total amount is required")
     var totalAmount: Double,
 
+    @Enumerated(EnumType.STRING)
     var paymentMethod: PaymentMethod? = null,
 
     @Enumerated(EnumType.STRING)
     var paymentProgress: PaymentProgress? = PaymentProgress.PENDING,
 
     var paymentDate: LocalDate? = null,
-
-    var createDate: LocalDate? = LocalDate.now(),
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    val id: Long? = null,
 )
