@@ -19,7 +19,7 @@ import java.time.LocalDate
 class OfferedPromotionsService(val offeredPromotionsRepository: OfferedPromotionsRepository,
                                val promotionRepository: PromotionRepository) {
     fun getAll(page: Int, size: Int, sort: String, search: String): PagedResponse<OfferedPromotion> {
-        val pageable : Pageable = PageRequest.of(page, size, Sort.Direction.ASC, sort)
+        val pageable = PageRequest.of(page, size, Sort.Direction.ASC, sort)
         val offeredPromotions = offeredPromotionsRepository.findAll(pageable)
         return PagedResponse(offeredPromotions)
     }
