@@ -47,6 +47,19 @@ class SaleService (
             promotion = promotionRepository.findById(sale.promotionId!!).orElseThrow() {
                 ResourceNotFoundException("Promotion", "id", sale.promotionId!!)
             }
+            if(promotion.isExpired()) {
+                throw InvalidInputException(ApiResponse(false, "Promotion is expired"), HttpStatus.BAD_REQUEST)
+            }
+        }
+
+        if(sale.paymentProgress == PaymentProgress.PAID || sale.paymentProgress == PaymentProgress.CANCELED) {
+            if(sale.paymentDate == null) {
+                throw InvalidInputException(ApiResponse(false, "Payment date is required"), HttpStatus.BAD_REQUEST)
+            }
+        }
+
+        if(sale.amount - sale.discountAmount != sale.totalAmount) {
+            throw InvalidInputException(ApiResponse(false, "Total amount is not correct"), HttpStatus.BAD_REQUEST)
         }
 
         return ResponseEntity(saleRepository.save(Sale(
