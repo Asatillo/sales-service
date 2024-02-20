@@ -46,8 +46,8 @@ class PromotionService(val promotionRepository: PromotionRepository) {
         if(existingPromotion.description != promotion.description) {
             existingPromotion.description = promotion.description
         }
-        if(existingPromotion.productTypes != promotion.productTypes) {
-            existingPromotion.productTypes = promotion.productTypes
+        if(existingPromotion.productType != promotion.productType) {
+            existingPromotion.productType = promotion.productType
         }
         if(existingPromotion.type != promotion.type) {
             existingPromotion.type = promotion.type

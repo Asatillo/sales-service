@@ -23,12 +23,11 @@ data class Promotion(
 
     @field:NotNull(message = "Service types cannot be blank")
     @Enumerated(EnumType.STRING)
-    var productTypes: ProductType,
+    var productType: ProductType,
 
     @field:NotNull(message = "Type cannot be blank")
     @Enumerated(EnumType.STRING)
     var amountType: AmountType,
-
 
     var startDate: LocalDate? = LocalDate.now(),
 

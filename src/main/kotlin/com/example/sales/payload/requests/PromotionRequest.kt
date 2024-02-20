@@ -24,7 +24,7 @@ data class PromotionRequest (
 
     @field:NotNull(message = "Service types cannot be blank")
     @field:Enumerated(EnumType.STRING)
-    var productTypes: ProductType,
+    var productType: ProductType,
 
     @field:NotNull(message = "Type cannot be blank")
     @field:Enumerated(EnumType.STRING)
@@ -54,7 +54,7 @@ data class PromotionRequest (
 
 ){
     fun getPromotion(): Promotion {
-        return Promotion(name, description, type, productTypes, amountType, startDate, endDate, targetCustomerSegment,
+        return Promotion(name, description, type, productType, amountType, startDate, endDate, targetCustomerSegment,
             amount, maxAmount, renewable)
     }
 }
