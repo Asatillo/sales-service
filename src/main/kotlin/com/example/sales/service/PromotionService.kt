@@ -1,6 +1,7 @@
 package com.example.sales.service
 
 import com.example.sales.exception.ExistingResourceException
+import com.example.sales.exception.InvalidInputException
 import com.example.sales.exception.ResourceNotFoundException
 import com.example.sales.model.Promotion
 import com.example.sales.payload.ApiResponse
@@ -23,6 +24,10 @@ class PromotionService(val promotionRepository: PromotionRepository) {
     }
 
     fun addPromotion(promotion: PromotionRequest): ResponseEntity<Promotion> {
+        if(promotion.endDate.isBefore(promotion.startDate)) {
+            throw InvalidInputException(ApiResponse(false, "End date cannot be before start date"), HttpStatus.BAD_REQUEST)
+        }
+
         return ResponseEntity(promotionRepository.save(promotion.getPromotion()), HttpStatus.CREATED)
     }
 
