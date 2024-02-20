@@ -51,9 +51,11 @@ class SaleService (
 
         return ResponseEntity(saleRepository.save(Sale(
             promotion = promotion!!,
+            description = sale.description,
             productId = sale.productId,
             productType = sale.productType,
             customerId = sale.customerId,
+            customer = sale.customer,
             amount = sale.amount,
             discountAmount = sale.discountAmount,
             totalAmount = sale.totalAmount,
@@ -90,6 +92,10 @@ class SaleService (
 
         if(saleToUpdate.productId != sale.productId) {
             saleToUpdate.productId = sale.productId
+        }
+
+        if(saleToUpdate.description != sale.description) {
+            saleToUpdate.description = sale.description
         }
 
         if(saleToUpdate.productType != sale.productType) {

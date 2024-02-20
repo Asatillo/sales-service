@@ -5,11 +5,15 @@ import com.example.sales.model.enums.PaymentProgress
 import com.example.sales.model.enums.ProductType
 import jakarta.persistence.*
 import jakarta.validation.constraints.Min
+import jakarta.validation.constraints.NotBlank
 import jakarta.validation.constraints.NotNull
 import java.time.LocalDate
 
 class SaleRequest(
     var promotionId: Long? = null,
+
+    @field:NotNull(message = "Description is required")
+    var description: String,
 
     @field:NotNull(message = "Product ID is required")
     var productId: Long? = null,
@@ -20,6 +24,9 @@ class SaleRequest(
 
     @field:NotNull(message = "Customer ID is required")
     var customerId: Long,
+
+    @field:NotBlank(message = "Customer is required")
+    var customer: String,
 
     @field:NotNull(message = "Amount is required")
     @field:Min(value = 1, message = "Amount must be greater than 0")

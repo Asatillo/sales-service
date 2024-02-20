@@ -113,12 +113,14 @@ class DBPopulate(val promotionRepository: PromotionRepository,
 
         val sale1 = Sale(
             promotion = promotion1,
+            description = "Basic plan sale with 5% off",
             productId = 1,
             productType = ProductType.PLAN,
             customerId = 1,
-            amount = 10000.0,
-            discountAmount = 500.0,
-            totalAmount = 9500.0,
+            customer = "Alice Smith",
+            amount = 1999.0,
+            discountAmount = 99.95,
+            totalAmount = 1899.05,
             paymentMethod = PaymentMethod.CASH,
             paymentProgress = PaymentProgress.PAID,
             paymentDate = LocalDate.now()
@@ -126,30 +128,36 @@ class DBPopulate(val promotionRepository: PromotionRepository,
 
         val sale2 = Sale(
             promotion = promotion2,
+            description = "Basic device sale with 10% off",
             customerId = 2,
+            customer = "Bob Johnson",
             productId = 2,
             productType = ProductType.DEVICE,
-            amount = 10000.0,
-            discountAmount = 1000.0,
-            totalAmount = 9000.0,
+            amount = 200000.0,
+            discountAmount = 20000.0,
+            totalAmount = 180000.0,
             paymentProgress = PaymentProgress.PENDING
         )
 
         val sale3 = Sale(
             promotion = promotion3,
+            description = "Ultimate plan sale with 30% off",
             customerId = 3,
+            customer = "Eva Andersen",
             productId = 3,
             productType = ProductType.PLAN,
-            amount = 10000.0,
-            discountAmount = 3000.0,
-            totalAmount = 7000.0,
+            amount = 5999.0,
+            discountAmount = 1799.7,
+            totalAmount = 3599.4,
             paymentProgress = PaymentProgress.CANCELED,
             paymentDate = LocalDate.now()
         )
 
         val sale4 = Sale(
             promotion = promotion4,
+            description = "Basic device sale with 10000 HUF off",
             customerId = 4,
+            customer = "David Brown",
             productId = 4,
             productType = ProductType.DEVICE,
             amount = 10000.0,
@@ -162,7 +170,9 @@ class DBPopulate(val promotionRepository: PromotionRepository,
 
         val sale5 = Sale(
             promotion = promotion5,
+            description = "Basic service sale with 10000 HUF off",
             customerId = 5,
+            customer = "Charlie Davis",
             productId = 5,
             productType = ProductType.SERVICE,
             amount = 10000.0,
@@ -172,8 +182,78 @@ class DBPopulate(val promotionRepository: PromotionRepository,
             paymentProgress = PaymentProgress.PAID,
             paymentDate = LocalDate.now()
         )
+        val sale6 = Sale(
+            promotion = promotion6,
+            description = "Basic service sale with 1000 HUF off",
+            customerId = 6,
+            customer = "Frank Evans",
+            productId = 6,
+            productType = ProductType.SERVICE,
+            amount = 10000.0,
+            discountAmount = 1000.0,
+            totalAmount = 9000.0,
+            paymentMethod = PaymentMethod.CARD,
+            paymentProgress = PaymentProgress.PAID,
+            paymentDate = LocalDate.now()
+        )
+        val sale7 = Sale(
+            promotion = promotion7,
+            description = "Basic service sale with 10% off",
+            customerId = 7,
+            customer = "Grace Garcia",
+            productId = 7,
+            productType = ProductType.SERVICE,
+            amount = 10000.0,
+            discountAmount = 1000.0,
+            totalAmount = 9000.0,
+            paymentMethod = PaymentMethod.CARD,
+            paymentProgress = PaymentProgress.PAID,
+            paymentDate = LocalDate.now()
+        )
+        val sale8 = Sale(
+            promotion = promotion8,
+            description = "Basic service sale with free service",
+            customerId = 8,
+            customer = "Henry Hernandez",
+            productId = 8,
+            productType = ProductType.SERVICE,
+            amount = 10000.0,
+            discountAmount = 1000.0,
+            totalAmount = 9000.0,
+            paymentMethod = PaymentMethod.CARD,
+            paymentProgress = PaymentProgress.PAID,
+            paymentDate = LocalDate.now()
+        )
+        val sale9 = Sale(
+            promotion = promotion9,
+            description = "Basic device sale with free device",
+            customerId = 9,
+            customer = "Isabella Hill",
+            productId = 9,
+            productType = ProductType.DEVICE,
+            amount = 10000.0,
+            discountAmount = 1000.0,
+            totalAmount = 9000.0,
+            paymentMethod = PaymentMethod.CARD,
+            paymentProgress = PaymentProgress.PAID,
+            paymentDate = LocalDate.now()
+        )
+        val sale10 = Sale(
+            promotion = promotion10,
+            description = "Basic plan sale with free plan",
+            customerId = 10,
+            customer = "Jack Hughes",
+            productId = 10,
+            productType = ProductType.PLAN,
+            amount = 10000.0,
+            discountAmount = 1000.0,
+            totalAmount = 9000.0,
+            paymentMethod = PaymentMethod.CARD,
+            paymentProgress = PaymentProgress.PAID,
+            paymentDate = LocalDate.now()
+        )
 
-        saleRepository.saveAll(listOf(sale1, sale2, sale3, sale4, sale5))
+        saleRepository.saveAll(listOf(sale1, sale2, sale3, sale4, sale5, sale6, sale7, sale8, sale9, sale10))
     }
 
 }
