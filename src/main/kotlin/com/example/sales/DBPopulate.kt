@@ -72,7 +72,65 @@ class DBPopulate(val promotionRepository: PromotionRepository,
             endDate = LocalDate.now().plusYears(1),
             renewable = false
         )
-        promotionRepository.saveAll(listOf(promotion1, promotion2, promotion3, promotion4, promotion5))
+        val promotion6 = Promotion(
+            name = "1000 HUF",
+            description = "1000 off all services",
+            productType = ProductType.SERVICE,
+            type = PromotionType.DISCOUNT,
+            amountType = AmountType.FIXED,
+            amount = 1000.0,
+            maxAmount = 1000.0,
+            endDate = LocalDate.now().plusYears(1),
+            renewable = false
+        )
+        val promotion7 = Promotion(
+            name = "10% off",
+            description = "10% off all services",
+            productType = ProductType.SERVICE,
+            type = PromotionType.DISCOUNT,
+            amountType = AmountType.PERCENTAGE,
+            amount = 10.0,
+            maxAmount = 10000.0,
+            renewable = false,
+            endDate = LocalDate.now().plusDays(10)
+        )
+        val promotion8 = Promotion(
+            name = "Free service",
+            description = "One free service during the next 10 days",
+            type = PromotionType.GIFT,
+            productType = ProductType.SERVICE,
+            amountType = AmountType.FIXED,
+            amount = 1.0,
+            maxAmount = 1.0,
+            renewable = false,
+            endDate = LocalDate.now().plusDays(10)
+        )
+        val promotion9 = Promotion(
+            name = "Free device",
+            description = "One free device during the next month",
+            type = PromotionType.GIFT,
+            productType = ProductType.DEVICE,
+            amountType = AmountType.FIXED,
+            amount = 1.0,
+            maxAmount = 1.0,
+            renewable = false,
+            endDate = LocalDate.now().plusMonths(1)
+        )
+        val promotion10 = Promotion(
+            name = "Free plan",
+            description = "One free plan during the next month",
+            type = PromotionType.GIFT,
+            productType = ProductType.PLAN,
+            amountType = AmountType.FIXED,
+            amount = 1.0,
+            maxAmount = 1.0,
+            renewable = false,
+            endDate = LocalDate.now().plusMonths(1)
+        )
+
+
+        promotionRepository.saveAll(listOf(promotion1, promotion2, promotion3, promotion4, promotion5, promotion6,
+            promotion7, promotion8, promotion9, promotion10))
 
         val offeredPromotion1 = OfferedPromotion(
             customerId = 1,
