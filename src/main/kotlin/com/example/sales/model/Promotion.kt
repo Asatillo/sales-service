@@ -55,7 +55,7 @@ data class Promotion(
     var id: Long? = null,
 ) {
     fun isExpired(): Boolean {
-        return endDate != null && endDate!!.isBefore(LocalDate.now())
+        return endDate.isBefore(LocalDate.now())
     }
 }
 
