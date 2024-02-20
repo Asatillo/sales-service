@@ -2,7 +2,6 @@ package com.example.sales.service
 
 import com.example.sales.exception.InvalidInputException
 import com.example.sales.exception.ResourceNotFoundException
-import com.example.sales.feign.DeviceInterface
 import com.example.sales.model.Promotion
 import com.example.sales.model.Sale
 import com.example.sales.model.enums.PaymentProgress
@@ -16,7 +15,6 @@ import org.springframework.data.domain.Sort
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.stereotype.Service
-import org.springframework.util.MultiValueMap
 
 @Service
 class SaleService (
