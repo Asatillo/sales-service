@@ -63,6 +63,10 @@ class PromotionService(val promotionRepository: PromotionRepository) {
         if(existingPromotion.maxAmount != promotion.maxAmount) {
             existingPromotion.maxAmount = promotion.maxAmount
         }
+        if(existingPromotion.renewable != promotion.renewable) {
+            existingPromotion.renewable = promotion.renewable
+        }
+
         return ResponseEntity(promotionRepository.save(existingPromotion), HttpStatus.OK)
     }
 
