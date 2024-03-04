@@ -16,7 +16,7 @@ class SaleRequest(
     var description: String,
 
     @field:NotNull(message = "Product ID is required")
-    var productId: Long? = null,
+    var productId: Long,
 
     @field:NotNull(message = "Product type is required")
     @Enumerated(EnumType.STRING)
@@ -29,12 +29,11 @@ class SaleRequest(
     var customer: String,
 
     @field:NotNull(message = "Amount is required")
-    @field:Min(value = 1, message = "Amount must be greater than 0")
+    @field:Min(value = 0, message = "Amount must be greater than or equal to 0")
     var amount: Double,
 
     @field:Min(value = 0, message = "Discount amount must be greater than or equal to 0")
-    @field:NotNull(message = "Discount amount is required")
-    var discountAmount: Double,
+    var discountAmount: Double = 0.0,
 
     @field:NotNull(message = "Total amount is required")
     var totalAmount: Double,

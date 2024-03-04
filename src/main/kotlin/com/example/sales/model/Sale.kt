@@ -13,17 +13,17 @@ import java.time.LocalDate
 class Sale(
     @ManyToOne
     @JoinColumn(name = "promotion_id")
-    var promotion: Promotion,
+    var promotion: Promotion? = null,
 
     @field:NotBlank(message = "Description is required")
     var description: String,
 
     @field:NotNull(message = "Product ID is required")
-    var productId: Long? = null,
+    var productId: Long,
 
     @field:NotNull(message = "Product type is required")
     @Enumerated(EnumType.STRING)
-    var productType: ProductType? = null,
+    var productType: ProductType,
 
     @field:NotNull(message = "Customer ID is required")
     var customerId: Long,
@@ -32,12 +32,11 @@ class Sale(
     var customer: String,
 
     @field:NotNull(message = "Amount is required")
-    @field:Min(value = 1, message = "Amount must be greater than 0")
+    @field:Min(value = 0, message = "Amount must be greater than or equal to 0")
     var amount: Double,
 
     @field:Min(value = 0, message = "Discount amount must be greater than or equal to 0")
-    @field:NotNull(message = "Discount amount is required")
-    var discountAmount: Double,
+    var discountAmount: Double = 0.0,
 
     @field:NotNull(message = "Total amount is required")
     var totalAmount: Double,

@@ -4,6 +4,7 @@ import com.example.sales.exception.InvalidInputException
 import com.example.sales.exception.ResourceNotFoundException
 import com.example.sales.model.Promotion
 import com.example.sales.model.Sale
+import com.example.sales.model.enums.AmountType
 import com.example.sales.model.enums.PaymentProgress
 import com.example.sales.payload.ApiResponse
 import com.example.sales.payload.PagedResponse
@@ -15,6 +16,7 @@ import org.springframework.data.domain.Sort
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.stereotype.Service
+import java.time.LocalDate
 
 @Service
 class SaleService (
@@ -24,7 +26,7 @@ class SaleService (
 
     fun getSales(page: Int, size: Int, sort: String, search: String): PagedResponse<Sale> {
         val pageable = PageRequest.of(page, size, Sort.Direction.ASC, sort)
-        val orders = saleRepository.findAll(pageable)
+        val orders = saleRepository.findAllWithSearch(search, pageable)
         return PagedResponse(orders)
     }
 
@@ -42,7 +44,8 @@ class SaleService (
     }
 
     fun add(sale: SaleRequest): ResponseEntity<Sale> {
-        var promotion : Promotion? = null
+        var promotion : Promotion? = null;
+        var discountAmount = 0.0
         if(sale.promotionId != null) {
             promotion = promotionRepository.findById(sale.promotionId!!).orElseThrow() {
                 ResourceNotFoundException("Promotion", "id", sale.promotionId!!)
@@ -50,20 +53,28 @@ class SaleService (
             if(promotion.isExpired()) {
                 throw InvalidInputException(ApiResponse(false, "Promotion is expired"), HttpStatus.BAD_REQUEST)
             }
+
+
+            if(promotion.amountType == AmountType.FIXED){
+                discountAmount = promotion.amount
+            }else if(promotion.amountType == AmountType.PERCENTAGE){
+                discountAmount = sale.amount * promotion.amount / 100
+                if(discountAmount > promotion.maxAmount) {
+                    discountAmount = promotion.maxAmount
+                }
+            }
+
         }
+        sale.discountAmount = discountAmount
 
         if(sale.paymentProgress == PaymentProgress.PAID || sale.paymentProgress == PaymentProgress.CANCELED) {
-            if(sale.paymentDate == null) {
-                throw InvalidInputException(ApiResponse(false, "Payment date is required"), HttpStatus.BAD_REQUEST)
-            }
+            sale.paymentDate = LocalDate.now()
         }
 
-        if(sale.amount - sale.discountAmount != sale.totalAmount) {
-            throw InvalidInputException(ApiResponse(false, "Total amount is not correct"), HttpStatus.BAD_REQUEST)
-        }
+        sale.totalAmount = sale.amount - sale.discountAmount
 
         return ResponseEntity(saleRepository.save(Sale(
-            promotion = promotion!!,
+            promotion = promotion,
             description = sale.description,
             productId = sale.productId,
             productType = sale.productType,
@@ -78,7 +89,6 @@ class SaleService (
         )), HttpStatus.CREATED)
     }
 
-    // unable to change the customer
     fun update(id: Long, sale: SaleRequest): ResponseEntity<Sale> {
         val promotion = promotionRepository.findById(sale.promotionId!!).orElseThrow() {
             ResourceNotFoundException("Promotion", "id", sale.promotionId!!)
