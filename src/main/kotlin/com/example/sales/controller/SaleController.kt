@@ -5,9 +5,7 @@ import com.example.sales.payload.PagedResponse
 import com.example.sales.payload.requests.SaleRequest
 import com.example.sales.service.SaleService
 import io.swagger.v3.oas.annotations.Operation
-import org.springframework.http.HttpHeaders
-import org.springframework.http.HttpStatus
-import org.springframework.http.HttpStatusCode
+import jakarta.validation.Valid
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 
@@ -45,13 +43,13 @@ class SaleController (val saleService: SaleService){
 
     @PostMapping
     @Operation(summary = "Add a sale")
-    fun add(@RequestBody sale: SaleRequest): ResponseEntity<Sale> {
+    fun add(@Valid @RequestBody sale: SaleRequest): ResponseEntity<Sale> {
         return saleService.add(sale)
     }
 
     @PutMapping("/{id}")
     @Operation(summary = "Update a sale")
-    fun update(@PathVariable id: Long, @RequestBody sale: SaleRequest): ResponseEntity<Sale> {
+    fun update(@PathVariable id: Long, @Valid @RequestBody sale: SaleRequest): ResponseEntity<Sale> {
         return saleService.update(id, sale)
     }
 }
