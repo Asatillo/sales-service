@@ -136,7 +136,9 @@ class DBPopulate(val promotionRepository: PromotionRepository,
             customerId = 1,
             promotion = promotion1,
             offerDate = LocalDate.now(),
-            communicationType = CommunicationType.EMAIL
+            communicationType = CommunicationType.EMAIL,
+            decision = DecisionType.ACCEPTED,
+            decisionDate = LocalDate.now()
         )
 
         val offeredPromotion2 = OfferedPromotion(
