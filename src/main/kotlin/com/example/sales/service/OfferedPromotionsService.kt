@@ -2,6 +2,7 @@ package com.example.sales.service
 
 import com.example.sales.exception.ResourceNotFoundException
 import com.example.sales.model.OfferedPromotion
+import com.example.sales.model.enums.ProductType
 import com.example.sales.payload.ApiResponse
 import com.example.sales.payload.PagedResponse
 import com.example.sales.payload.requests.OfferedPromotionRequest
@@ -35,6 +36,12 @@ class OfferedPromotionsService(val offeredPromotionsRepository: OfferedPromotion
         val pageable : Pageable = PageRequest.of(page, size, Sort.Direction.ASC, sort)
         val offeredPromotions = offeredPromotionsRepository.findByCustomerId(id, pageable)
         return PagedResponse(offeredPromotions)
+    }
+
+    fun getActiveByCustomerIdAndProductType(id: Long, type: ProductType, search: String): PagedResponse<OfferedPromotion> {
+        val offeredPromotions = offeredPromotionsRepository.findByCustomerIdAndDeviceType(id, type, search)
+
+        return PagedResponse(offeredPromotions, 1, offeredPromotions.size, offeredPromotions.size.toLong(), 1 )
     }
 
     fun add(offeredPromotion: OfferedPromotionRequest): ResponseEntity<OfferedPromotion> {

@@ -1,6 +1,7 @@
 package com.example.sales.controller
 
 import com.example.sales.model.OfferedPromotion
+import com.example.sales.model.enums.ProductType
 import com.example.sales.payload.ApiResponse
 import com.example.sales.payload.PagedResponse
 import com.example.sales.payload.requests.OfferedPromotionRequest
@@ -32,6 +33,12 @@ class OfferedPromotionsController(val offeredPromotionsService: OfferedPromotion
         @RequestParam(value = "search", required = false, defaultValue = "") search: String
     ) : PagedResponse<OfferedPromotion>
     = offeredPromotionsService.getByCustomerId(id, page-1, size, sort, search)
+
+    @GetMapping("/customer/{id}/product-type/{type}")
+    fun getActiveByCustomerIdAndProductType(@PathVariable id: Long, @PathVariable type: ProductType,
+                        @RequestParam(value = "search", required = false, defaultValue = "") search: String
+    ) : PagedResponse<OfferedPromotion>
+            = offeredPromotionsService.getActiveByCustomerIdAndProductType(id, type, search)
 
     @PostMapping
     fun add(@Valid @RequestBody offeredPromotion: OfferedPromotionRequest) : ResponseEntity<OfferedPromotion>
