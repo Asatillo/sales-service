@@ -21,7 +21,7 @@ class OfferedPromotionsService(val offeredPromotionsRepository: OfferedPromotion
                                val promotionRepository: PromotionRepository) {
     fun getAll(page: Int, size: Int, sort: String, search: String): PagedResponse<OfferedPromotion> {
         val pageable = PageRequest.of(page, size, Sort.Direction.ASC, sort)
-        val offeredPromotions = offeredPromotionsRepository.findAll(pageable)
+        val offeredPromotions = offeredPromotionsRepository.findAllWithSearch(search, pageable)
         return PagedResponse(offeredPromotions)
     }
 

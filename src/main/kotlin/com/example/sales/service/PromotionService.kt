@@ -19,7 +19,7 @@ import org.springframework.http.ResponseEntity
 class PromotionService(val promotionRepository: PromotionRepository) {
     fun getPromotions(page: Int, size: Int, sort: String, search: String): PagedResponse<Promotion> {
         val pageable : Pageable = PageRequest.of(page, size, Sort.Direction.ASC, sort)
-        val customers = promotionRepository.findAll(pageable)
+        val customers = promotionRepository.findAllWithSearch(search, pageable)
         return PagedResponse(customers)
     }
 
