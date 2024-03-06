@@ -35,7 +35,6 @@ class SaleRequest(
     @field:Min(value = 0, message = "Discount amount must be greater than or equal to 0")
     var discountAmount: Double = 0.0,
 
-    @field:NotNull(message = "Total amount is required")
     var totalAmount: Double,
 
     @Enumerated(EnumType.STRING)
