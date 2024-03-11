@@ -14,4 +14,8 @@ interface PromotionRepository: JpaRepository<Promotion, Long>{
     @Query("SELECT p FROM Promotion p " +
             "WHERE CONCAT(p.name, ' ', p.description, ' ', p.productType, ' ', p.type) LIKE %:search%")
     fun findAllWithSearch(search: String, pageable: Pageable): Page<Promotion>
+
+    @Query("SELECT p FROM Promotion p " +
+            "WHERE CONCAT(p.name, ' ', p.description, ' ', p.productType, ' ', p.type) LIKE %:search% AND p.active = true")
+    fun findActivePromotions(search: String, pageable: Pageable): Page<Promotion>
 }

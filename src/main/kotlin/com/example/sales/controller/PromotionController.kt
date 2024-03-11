@@ -24,6 +24,16 @@ class PromotionController(val promotionService: PromotionService) {
         return promotionService.getPromotions(page-1, size, sort, search)
     }
 
+    @GetMapping("/active")
+    fun getActivePromotions(
+        @RequestParam(value = "page", defaultValue = "1") page: Int,
+        @RequestParam(value = "size", defaultValue = "10") size: Int,
+        @RequestParam(value = "sort", defaultValue = "id") sort: String,
+        @RequestParam(value = "search", defaultValue = "") search: String
+    ): PagedResponse<Promotion> {
+        return promotionService.getActivePromotions(page-1, size, sort, search)
+    }
+
     @GetMapping("/{id}")
     fun getPromotion(@PathVariable id: Long): ResponseEntity<Promotion> {
         return promotionService.getPromotion(id)

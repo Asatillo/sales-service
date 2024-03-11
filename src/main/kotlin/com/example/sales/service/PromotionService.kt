@@ -23,6 +23,12 @@ class PromotionService(val promotionRepository: PromotionRepository) {
         return PagedResponse(customers)
     }
 
+    fun getActivePromotions(page: Int, size: Int, sort: String, search: String): PagedResponse<Promotion> {
+        val pageable : Pageable = PageRequest.of(page, size, Sort.Direction.ASC, sort)
+        val customers = promotionRepository.findActivePromotions(search, pageable)
+        return PagedResponse(customers)
+    }
+
     fun addPromotion(promotion: PromotionRequest): ResponseEntity<Promotion> {
         if(promotion.endDate.isBefore(promotion.startDate)) {
             throw InvalidInputException(ApiResponse(false, "End date cannot be before start date"), HttpStatus.BAD_REQUEST)
