@@ -39,7 +39,7 @@ class SaleService (
 
     fun getSalesByCustomerId(id: Long, page: Int, size: Int, sort: String, search: String): PagedResponse<Sale> {
         val pageable = PageRequest.of(page, size, Sort.Direction.ASC, sort)
-        val orders = saleRepository.findByCustomerId(id, pageable)
+        val orders = saleRepository.findByCustomerId(id, search, pageable)
         return PagedResponse(orders)
     }
 
