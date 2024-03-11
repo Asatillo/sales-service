@@ -4,6 +4,7 @@ import com.example.sales.model.enums.CommunicationType
 import com.example.sales.model.enums.DecisionType
 import jakarta.persistence.*
 import jakarta.validation.constraints.NotNull
+import java.time.LocalDate
 
 data class OfferedPromotionRequest(
     @field:NotNull(message = "Customer id cannot be blank")
@@ -18,5 +19,13 @@ data class OfferedPromotionRequest(
 
     @Enumerated(EnumType.STRING)
     @field:NotNull(message = "Decision type cannot be blank")
-    var decision: DecisionType? = DecisionType.PENDING,
-)
+    var decision: DecisionType,
+
+    var decisionDate: LocalDate? = null
+){
+    init {
+        if (decision == DecisionType.ACCEPTED || decision == DecisionType.REJECTED) {
+            decisionDate = LocalDate.now()
+        }
+    }
+}

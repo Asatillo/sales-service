@@ -52,6 +52,8 @@ class OfferedPromotionsService(val offeredPromotionsRepository: OfferedPromotion
             customerId =  offeredPromotion.customerId,
             promotion = promotion,
             communicationType =  offeredPromotion.communicationType,
+            decision = offeredPromotion.decision,
+            decisionDate = offeredPromotion.decisionDate
         )
         return ResponseEntity(offeredPromotionsRepository.save(newOfferedPromotion), HttpStatus.CREATED)
     }
