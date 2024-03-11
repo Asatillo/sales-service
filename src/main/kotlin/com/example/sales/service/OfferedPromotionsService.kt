@@ -34,7 +34,7 @@ class OfferedPromotionsService(val offeredPromotionsRepository: OfferedPromotion
 
     fun getByCustomerId(id: Long, page: Int, size: Int, sort: String, search: String): PagedResponse<OfferedPromotion> {
         val pageable : Pageable = PageRequest.of(page, size, Sort.Direction.ASC, sort)
-        val offeredPromotions = offeredPromotionsRepository.findByCustomerId(id, pageable)
+        val offeredPromotions = offeredPromotionsRepository.findByCustomerId(id, search, pageable)
         return PagedResponse(offeredPromotions)
     }
 

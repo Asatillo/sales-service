@@ -11,7 +11,9 @@ import org.springframework.stereotype.Repository
 
 @Repository
 interface OfferedPromotionsRepository: JpaRepository<OfferedPromotion, Long> {
-    fun findByCustomerId(id: Long, pageable: Pageable): Page<OfferedPromotion>
+    @Query("SELECT o FROM OfferedPromotion o WHERE o.customerId = :id " +
+            "AND CONCAT(o.promotion.name, ' ', o.decision, ' ', o.communicationType)  LIKE %:search%")
+    fun findByCustomerId(id: Long, search: String, pageable: Pageable): Page<OfferedPromotion>
 
     @Query("SELECT o FROM OfferedPromotion o WHERE o.customerId = :id AND o.promotion.productType = :type " +
             "AND o.promotion.name LIKE %:search% and o.decision = 'ACCEPTED' and o.promotion.active = true")
